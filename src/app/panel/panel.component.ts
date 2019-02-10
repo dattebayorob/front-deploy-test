@@ -17,6 +17,7 @@ export class PanelComponent implements OnInit {
   public turn: number = 0;
   public life: number = 3;
   public phraseCurrent: Phrase;
+  public progress: number = 0;
 
   constructor() { 
     this.setPhraseCurrent(this.phrases[this.turn]);
@@ -34,11 +35,16 @@ export class PanelComponent implements OnInit {
   public setPhraseCurrent(phraseCurrent: Phrase):void{
     this.phraseCurrent = phraseCurrent;
   }
+  public increaseProgress():void{
+    this.progress += 100/this.phrases.length;
+  }
   public checkTranslation():void{
     if(this.phraseCurrent.ptBr == this.response){
       this.turn++;
-      this.setPhraseCurrent(this.phrases[this.turn]);
-      alert('Acertou mizeravi');
+      this.increaseProgress();
+      if(this.turn < this.phrases.length){
+        this.setPhraseCurrent(this.phrases[this.turn]);
+      }
     }else{
       this.life--
       alert('Errou mazela');
