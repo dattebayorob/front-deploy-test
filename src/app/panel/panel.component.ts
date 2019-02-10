@@ -30,10 +30,11 @@ export class PanelComponent implements OnInit {
     this.response = response;
   }
   public getResponse(): string{
-    return this.response;
+    return this.response == null?'':this.response;
   }
   public setPhraseCurrent(phraseCurrent: Phrase):void{
     this.phraseCurrent = phraseCurrent;
+    this.response = null;
   }
   public increaseProgress():void{
     this.progress += 100/this.phrases.length;
