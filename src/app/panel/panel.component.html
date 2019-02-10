@@ -12,16 +12,21 @@
     <div class="row">
       <div class="col">
         <h4>{{title}}</h4>
-        <p>{{phrases[0].eng}}</p>
+        <p>{{phraseCurrent.eng}}</p>
+        <p>{{response}}</p>
         <div class="form-group">
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea
+            class="form-control"
+            rows="3"
+            (input)="setResponse($event.target.value)"
+          ></textarea>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <div class="d-flex justify-content-end">
-            <button class="btn btn-primary">Traduzir</button>
+            <button class="btn btn-primary" (click)="checkTranslation()">Traduzir</button>
         </div>
       </div>
     </div>
