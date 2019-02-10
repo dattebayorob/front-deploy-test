@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-course';
+  public isGameRunning: boolean = true;
+  public message: string[];
+
+  public endGame(message: string[]):void{
+    this.message = message;
+    this.isGameRunning = false;
+  }
+  public restartGame():void{
+    this.isGameRunning = true;
+  }
+
 }

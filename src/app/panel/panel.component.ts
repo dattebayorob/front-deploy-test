@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
 
 import { Phrase } from '../shared/phrase.model';
 import { PHRASE } from './phrase-mock';
@@ -9,7 +9,7 @@ import { PHRASE } from './phrase-mock';
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.css']
 })
-export class PanelComponent implements OnInit {
+export class PanelComponent implements OnInit,OnDestroy {
   public title: string = 'Traduza a frase: ';
   public phrases: Array<Phrase> = PHRASE;
   public response: string;
@@ -19,11 +19,15 @@ export class PanelComponent implements OnInit {
   public phraseCurrent: Phrase;
   public progress: number = 0;
 
+  @Output() public endGame: EventEmitter<String[]> = new EventEmitter();
+
   constructor() { 
     this.setPhraseCurrent(this.phrases[this.turn]);
   }
 
   ngOnInit() {
+  }
+  ngOnDestroy(){
   }
 
   public setResponse(response: string): void{
@@ -43,13 +47,15 @@ export class PanelComponent implements OnInit {
     if(this.phraseCurrent.ptBr == this.response){
       this.turn++;
       this.increaseProgress();
-      if(this.turn < this.phrases.length){
+      if(this.turn === this.phrases.length){
+        this.endGame.emit(["success","Tu venceu mizera"]);
+      }else{
         this.setPhraseCurrent(this.phrases[this.turn]);
       }
     }else{
       this.life--
       if(this.life === -1){
-        alert('End game');
+        this.endGame.emit(["warning","Se Fudeu"]);
       }
     }
     

@@ -1,4 +1,10 @@
 <div class="container">
     <app-top></app-top>
-    <app-panel></app-panel>
+    <div *ngIf="isGameRunning; else endGameTemplate">
+        <app-panel (endGame)="endGame($event)"></app-panel>
+    </div>
+    <ng-template #endGameTemplate>
+        <app-end-game [message]="message" (restartGame)="restartGame($event)"></app-end-game>
+    </ng-template>
+
 </div>
