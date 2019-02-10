@@ -48,7 +48,9 @@ export class PanelComponent implements OnInit {
       }
     }else{
       this.life--
-      alert('Errou mazela');
+      if(this.life === -1){
+        alert('End game');
+      }
     }
     
   }

@@ -1,3 +1,1 @@
-<img [src]="lifeFull">
-<img [src]="lifeFull">
-<img [src]="lifeEmpty">
+<img *ngFor="let heart of lifes" [src]="heart.heartPath()">
